@@ -1,16 +1,15 @@
+import { Global } from "@emotion/react";
+import { GlobalStyled } from "./Global/Global.styled";
+
+import { Container } from "./App.styled";
+import { Phonebook } from "./Phonebook/Phonebook";
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <Global styles={GlobalStyled} />
+      <Phonebook>
+      </Phonebook>
+    </Container>
   );
 };
