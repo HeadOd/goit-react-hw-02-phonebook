@@ -40,9 +40,9 @@ export class Phonebook extends Component {
   renderContacts = () => {
     const { contacts, filter } = this.state;
     let filtered = contacts;
-    if (filter.toLowerCase()) {
+    if (filter) {
       filtered = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filter)
+        contact.name.toLowerCase().includes(filter.toLowerCase())
       );
     }
     return filtered;
