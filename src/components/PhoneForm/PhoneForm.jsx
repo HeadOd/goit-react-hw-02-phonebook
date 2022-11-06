@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 
 import { Form, Title, NameInput } from "./PhoneForm.styled";
 
-export const PhoneForm = ({ onLeaveContact, onImputChange }) => {
+export const PhoneForm = ({ onLeaveContact }) => {
   return <Form onSubmit={onLeaveContact}>
     <Title>Name</Title>
     <NameInput

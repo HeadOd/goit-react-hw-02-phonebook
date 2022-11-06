@@ -7,3 +7,7 @@ export const Filter = ({ findContact }) => {
     onChange={findContact}/>
 </label>
 }
+
+Filter.propTypes = {
+  findContact: PropTypes.func.isRequired,
+}

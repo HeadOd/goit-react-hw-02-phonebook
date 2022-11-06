@@ -14,22 +14,32 @@ export class Phonebook extends Component {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    name: '',
-    number: '',
     filter: '',
   }
 
   onLeaveContact = (e) => {
     e.preventDefault();
     const {elements: { name, number }}  = e.currentTarget;
+    const { contacts } = this.state;
 
-    let contact = {
+    let contactNew = {
       number: number.value,
       name: name.value,
-      id: nanoid()
+      id: nanoid(),
     }
+    
+    if (contacts.find( contact => contact.name.toLowerCase() === name.value.toLowerCase())) {
+      alert(`${name.value} is alredy in contacts`) ;
+    } else {
+      this.setState(({ contacts }) => ({ contacts : [contactNew, ...contacts]}));
+    }  
 
-    this.setState(({ contacts }) => ({ contacts : [contact, ...contacts]}));
+    this.reset(name, number);
+  }
+
+  reset = (name, number) => {
+    name.value = ''; 
+    number.value = '';
   }
 
   findContact = (e) => {
@@ -42,25 +52,31 @@ export class Phonebook extends Component {
     let filtered = contacts;
     if (filter) {
       filtered = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filter.toLowerCase())
+        contact.name.toLowerCase().includes(filter.toLowerCase()),
       );
     }
     return filtered;
   };
+
+  deleteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter(contact => contact.id !==id),
+    }))
+  }
 
   render() {
     const { contacts } = this.state;
 
     return <div> <Section title='Phonebook'>
                     <PhoneForm onLeaveContact={this.onLeaveContact} />
-                  </Section>
-
-                  <Filter findContact={this.findContact} />
+                  </Section>                 
 
                   <Section title='Contacts'>
+                    <Filter findContact={this.findContact} />
                     <Contacts
-                    contacts={this.renderContacts()} />
+                    contacts={this.renderContacts()} 
+                    onDeleteContact={this.deleteContact}/>
                   </Section>
-                    </div>
+            </div>
   }
 }
