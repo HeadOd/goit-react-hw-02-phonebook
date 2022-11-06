@@ -65,8 +65,6 @@ export class Phonebook extends Component {
   }
 
   render() {
-    const { contacts } = this.state;
-
     return <div> <Section title='Phonebook'>
                     <PhoneForm onLeaveContact={this.onLeaveContact} />
                   </Section>                 
