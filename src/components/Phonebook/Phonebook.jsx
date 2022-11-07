@@ -28,11 +28,15 @@ export class Phonebook extends Component {
       id: nanoid(),
     }
     
-    if (contacts.find( contact => contact.name.toLowerCase() === name.value.toLowerCase())) {
-      alert(`${name.value} is alredy in contacts`) ;
-    } else {
-      this.setState(({ contacts }) => ({ contacts : [contactNew, ...contacts]}));
-    }  
+    const isExist = contacts.find( contact => contact.name.toLowerCase() === name.value.toLowerCase());
+
+    if (isExist) {
+      alert(`${name.value} is alredy in contacts`);
+      return;
+    } 
+    
+    this.setState(({ contacts }) => ({ contacts : [contactNew, ...contacts]}));
+      
 
     this.reset(name, number);
   }
